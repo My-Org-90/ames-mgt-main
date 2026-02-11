@@ -1,7 +1,8 @@
 module "resource_group" {
-  count    = var.resource_group_create ? 1 : 0
-  source   = "Azure/avm-res-resources-resourcegroup/azurerm"
-  version  = "0.2.1"
+  count   = var.resource_group_create ? 1 : 0
+  source  = "Azure/avm-res-resources-resourcegroup/azurerm"
+  version = "0.2.1"
+
   location = var.location
   name     = local.resource_names.resource_group_name
   tags     = var.tags
@@ -12,7 +13,7 @@ module "virtual_network" {
   version = "0.8.1"
 
   resource_group_name = local.resource_group_name
-  location = var.location
+  location            = var.location
   name                = local.resource_names.virtual_network_name
   subnets             = var.virtual_network_subnets
   address_space       = var.virtual_network_address_space
@@ -44,6 +45,7 @@ module "virtual_machine" {
       ip_configurations = {
         private = {
           name                          = local.resource_names.network_interface_name
+          # Note: Ensure "example" matches the key in your var.virtual_network_subnets
           private_ip_subnet_resource_id = module.virtual_network.subnets["example"].resource_id
         }
       }
