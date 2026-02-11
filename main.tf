@@ -71,8 +71,10 @@ module "virtual_machine" {
       name = local.resource_names.network_interface_name
       ip_configurations = {
         private = {
-          name                          = local.resource_names.network_interface_name
-          private_ip_subnet_resource_id  = module.virtual_network.subnets["example"].resource_id
+          name = local.resource_names.network_interface_name
+          # Note: Ensure the key in var.virtual_network_subnets matches "example"
+          # if your subnet is named differently in dev.tfvars, change "example" below.
+          private_ip_subnet_resource_id = module.virtual_network.subnets["example"].resource_id
         }
       }
     }
