@@ -14,8 +14,4 @@ tags = {
   environment = "dev"
 }
 
-tags = {
-      deployed_by = "terraform"
-      environment = "dev"
-      owner       = "Fred Bloggs"
-    }
+
